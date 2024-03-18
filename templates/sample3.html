@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Mapeo de resultados</title> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #map {
+            width: 100%;
+            height: 350px; /* Adjust height as needed */
+            margin: 20px auto; /* Center the map horizontally */
+        }
+    </style>
+
+    <!-- Include Leaflet library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Mapeo de resultados</h1>
+        <div class="form-group">
+            <label for="keywords">Palabras clave:</label>
+            <input type="text" id="keywords" placeholder="Escriba las palabras clave">
+        </div>
+        <div class="form-group">
+            <label for="year">Año a buscar:</label>
+            <input type="text" id="year" placeholder="Escriba el año a buscar">
+        </div>
+        <button type="button" class="btn" onclick="scrapeData()">Scrapear</button>
+        <button type="button" class="btn hidden" id="visualizeBtn" onclick="visualizeData()">Visualizar resultados</button>
+        <a id="downloadLink" class="btn hidden" download="resultados.csv">Descargar resultados</a>
+    </div>
+
+    <div class = "folium-map" id="map"></div>
+
+    <script>
+        var map = L.map(
+            "map",
+            {
+                //center: [20.9768256, -89.7055142],
+                center: [21.284259, -99.417428],
+                crs: L.CRS.EPSG3857,
+                zoom: 5,
+                zoomControl: true,
+                preferCanvas: false,
+            }
+            
+        );
+
+        var tilel = L.tileLayer(
+            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+        );
+
+        tilel.addTo(map);
+
+        // Setting default heat layer
+        var heatl = L.heatLayer(
+                [[21.161908, -86.851528, 0], [22.768, -102.5814, 1], [30.8406, -115.2838, 0.7] ],
+                {"blur": 15, "gradient": {"0.0": "blue", "0.6": "cyan", "0.7": "lime", "0.8": "yellow", "1.0": "red"}, "maxZoom": 18, "minOpacity": 0.6, "radius": 26}
+        );
+            
+        heatl.addTo(map);
+
+        function scrapeData() {
+            // Simulated data fetching process
+            var data = [
+                [  20.9768256, -89.7055142, 5 ],
+                [  21.161908, -86.851528, 8 ],
+                // Add more data here
+            ];
+            // Simulated delay (replace with actual data fetching process)
+            setTimeout(function() {
+                // Show "Visualizar resultados" and "Descargar resultados" buttons
+                document.getElementById('visualizeBtn').classList.remove('hidden');
+                document.getElementById('downloadLink').classList.remove('hidden');
+            }, 1000);
+
+            // You can store the fetched data for later use (e.g., visualization)
+            localStorage.setItem('scrapedData', JSON.stringify(data));
+
+
+            
+            //NEW
+            // Send a POST request to the Flask backend
+            fetch('/scrape', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Do something with the response data, if needed
+                localStorage.setItem('scrapedData', JSON.stringify(data));
+
+                // Show "Visualizar resultados" and "Descargar resultados" buttons
+                document.getElementById('visualizeBtn').classList.remove('hidden');
+                document.getElementById('downloadLink').classList.remove('hidden');
+            })
+            .catch(error => {
+                // Handle errors, if any
+                console.error('Error:', error);
+            }); 
+        }
+
+        function visualizeData() {
+            map.removeLayer(heatl)
+            // Retrieve data from localStorage (replace with actual data retrieval)
+           var data = JSON.parse(localStorage.getItem('scrapedData'));
+
+            // Visualize data on the map
+            var heatData = data.map(function(item) {
+                return [item.lat, item.lon, item.num_elements];
+            });
+/*
+            heatl = L.heatLayer
+            ([ 
+                [21.161908, -86.851528, 5],  
+                [22.7680, -102.5814, 1],  
+                [30.8406, -115.2838, 0],  
+                [24.0277, -104.6532, 0],  
+                [19.4326, -99.1332, 0], 
+                [28.6353, -106.0889, 0],  
+                [27.9698, -101.1732, 0],  
+                [19.2465, -103.7272, 0],  
+                [19.3191, -98.2020, 0],
+                [22.3964, -103.7250, 0], 
+                [17.5707, -99.1095, 0],  
+                [20.5881, -100.3899, 0],  
+                [20.6595, -103.3494, 0], 
+                [19.4326, -99.1332, 0], 
+                [24.8615, -98.6474, 0],  
+                [27.0971, -101.6666, 0], 
+                [25.4383, -100.9737, 0], 
+                [21.1619, -86.8515, 0], 
+                [19.3016, -99.1574, 0], 
+                [16.7569, -93.1292, 0],  
+                [20.5888, -87.1266, 0],  
+                [20.5881, -89.3380, 0],  
+                [22.4027, -100.5537, 0],  
+                [23.6345, -102.5528, 0],  
+                [27.7704, -107.6295, 0], 
+                [25.4243, -100.9737, 0], 
+                [17.9883, -92.9194, 0], 
+                [21.1619, -89.0706, 0], 
+                [19.3191, -99.1836, 0],  
+                [16.8284, -99.8787, 0], 
+                [20.5881, -97.5347, 0], 
+                [22.7709, -102.5832, 0],  
+                ]
+                ,{"blur": 15, "gradient": {"0.0": "blue", "0.6": "cyan", "0.7": "lime", "0.8": "yellow", "1.0": "red"}, "maxZoom": 18, "minOpacity": 0.5, "radius": 25}
+            );*/
+            heatl.addTo(map)
+        }
+
+        function downloadResults() {
+            // Retrieve data from localStorage (replace with actual data retrieval)
+            var data = localStorage.getItem('scrapedData')
+
+            // Create a download link and trigger click
+            var encodedUri = encodeURI(csvContent);
+            var link = document.getElementById('downloadLink');
+            link.href = encodedUri;
+            link.click();
+        }
+    </script>
+</body>
+</html>
