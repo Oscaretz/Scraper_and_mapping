@@ -21,11 +21,13 @@ def scrape_data():
         qexception_input = data["qexception"]
         qrangedate_input = data["qrangedate"]
         qsite_input = data["qsite"]
+        nqueries_input = data["nqueries"]
+        
         
         if not os.path.exists('archivos'):
            os.makedirs('archivos')
 
-        file_path = asyncio.run(main(num_pages=1, query=query_input, qoption=qoption_input, qexception=qexception_input, qrangedate=qrangedate_input, qsite=qsite_input))
+        file_path = asyncio.run(main(nqueries=nqueries_input, query=query_input, qoption=qoption_input, qexception=qexception_input, qrangedate=qrangedate_input, qsite=qsite_input))
         
         return jsonify({'message': 'Scraping successful!', 'output_file': file_path})
     
