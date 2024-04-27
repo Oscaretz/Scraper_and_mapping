@@ -53,6 +53,28 @@ pip install <placeholder>
 
 ## Setting Up and Running the Application: ⚒️
 
+### Docker Installation:
+
+Before running the application, make sure you have Docker installed on your system. Follow these steps to install Docker:
+
+1. **Download Docker**:
+   - Visit the [Docker website](https://www.docker.com/get-started) to download Docker for your operating system.
+   - Follow the installation instructions provided for your specific platform.
+
+2. **Verify Installation**:
+   - Once Docker is installed, open a terminal or command prompt and run the following command to verify the installation:
+     ```
+     docker --version
+     ```
+   - If Docker is installed correctly, you should see the version information displayed in the terminal.
+
+3. **Run Docker Desktop**:
+   - Launch Docker Desktop from your applications menu or start menu.
+   - Docker Desktop will start the Docker service, allowing you to build and run Docker containers on your system.
+
+Now that Docker is installed, you can proceed with setting up and running the application using the instructions provided below.
+
+### Build and run:
 To download the API and initialize it, open the terminal in yout chosen Directory and run the next commands in it:
 
 1. **Clone the Repository**: 
@@ -75,7 +97,7 @@ Build and run the container using docker compose
 
 3. **Run the app**:
 
-  - Copy the 1st direction (It usually is 127.0.0.1:5000) and paste it in your browser.
+  Copy the 1st direction (It usually is 127.0.0.1:5000) and paste it in your browser.
 
 
 
