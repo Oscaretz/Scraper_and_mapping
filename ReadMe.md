@@ -105,6 +105,8 @@ Build and run the container using docker compose
 
 Once you've opened the browser with the given direction, follow these steps to set it up and start scraping:
 
+![alt text](https://github.com/Oscaretz/Scraper_and_mapping/blob/main/ss/front.png?raw=true)
+
 1. **Scrape news**:
    Insert all the parameters you want and click the botom 'Scrape'. After that, the table of the righ side will be filled with 10 news as reference. Here is the guide to write the parameters:
 
