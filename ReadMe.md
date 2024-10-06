@@ -124,11 +124,11 @@ Once you've opened the browser with the given direction, follow these steps to s
 
 ```json
 {
-       "Title": {
-        "Source": "",
-        "Link": "",
-        "Date": "",
-        "States": ["", ...] 
+       "title_example": {
+        "Source": "source_example",
+        "Link": "www.link-example.com",
+        "Date": "date_example",
+        "States": ["state_example", ... 
     }, 
     ...
 }
