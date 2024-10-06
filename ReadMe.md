@@ -7,13 +7,11 @@
 
 Google News is a comprehensive platform for accessing and discovering news articles from around the world. Use it as your go-to source for staying informed about current events and trending topics, or as a tool to delve deeper into specific news categories that interest you.
 
-Google News offers a user-friendly interface that makes it easy to navigate and explore a wide range of news stories. Whether you're looking for breaking news, in-depth analysis, or local updates, Google News provides a platform for grass-roots news discussion and discovery.
-
 ### Why Scrape and Map news from Google News? 📈
 
-A web scraper for Google News is a tool designed to automatically extract news articles and related information from the Google News website. Additionally, this tool visualizes a heatmap depicting the trends of the Mexican states. The gathered data can be downloaded in a JSON file, which includes headlines, publication dates, links, and sources. Web scraper news can serve various purposes, such as conducting research on news trends, analyzing media coverage, or aggregating news content for customized news feeds.
+A web scraper for Google News is a tool designed to automatically extract news articles and related information from the Google News website. Additionally, this tool visualizes a heatmap depicting the trends of the Mexican states. The gathered data can be downloaded in a JSON file, which includes headlines, publication dates, links, sources and the states identified. Web scraper news can serve various purposes, such as conducting research on news trends, analyzing media coverage, or aggregating news content for customized news feeds.
 
-This repository houses a robust web scraper developed in Python, which utilizes libraries such as BeautifulSoup and Requests. It enables you to scrape news data from Google News based on specified search parameters and retrieve the results in JSON format. Below are the details on how to set up and utilize this web scraper effectively.
+This repository houses a robust web scraper developed in Python, which utilizes libraries such as BeautifulSoup, fake_useragent, asyncio, aiohttp and flask. It enables you to scrape news data from Google News based on specified search parameters and retrieve the results in JSON format. Below are the details on how to set up and utilize this web scraper effectively.
 
 ## Dependencies:
 We will be using the following dependencies for our code, which will be installed later:
