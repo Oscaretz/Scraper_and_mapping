@@ -1,7 +1,9 @@
 
 # Web Scraper & Maping
 ![alt text](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue) 
-![alt text](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
+![alt text](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![alt text](https://img.shields.io/badge/Google-4285F4?style=for-the-badge&logo=google&logoColor=white)
+
 
 ## Google News?  📰
 
