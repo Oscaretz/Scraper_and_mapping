@@ -25,13 +25,6 @@ We will be using the following dependencies for our code, which will be installe
 - requests_html
 - jsonify
 
-
-To install them manually, run the next command changing the placeholder value with the name of the required dependency:
-
-```
-pip install <placeholder>
-```
-
 ## Files Included: :pick:	
 
 1. **app.py**: This file contains the Flask application with endpoints for executing the web scrape news, visualizing the data, download results and run the interface on the browser.
