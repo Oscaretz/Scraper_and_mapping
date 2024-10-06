@@ -119,7 +119,7 @@ Once you've opened the browser with the given direction, follow these steps to s
 2. **Visualize the heat map**: Visualize the heat map with the data gathered by clicking the botom 'Visualize'.
 ![alt text](https://github.com/Oscaretz/Scraper_and_mapping/blob/main/ss/mapping.png?raw=true)
 
-4. **Downloa results**:
+4. **Download results**:
    Click the bottom 'Download' to download a JSON file with the news collected within the given information (Title, source, date, link and State)
 
 ```json
