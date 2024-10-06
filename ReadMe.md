@@ -121,10 +121,12 @@ Once you've opened the browser with the given direction, follow these steps to s
     - Palabra(s) secundaria(s): Optional; _Insert the secundary keywords, separated by comas. Could be one or more._ 
 
     - Dominio web: _Optional; Insert the domain (ej. www.samplenews.com) or type of domain  (.gov .edu .org .mx .col .eu etc...)_
+  ![alt text](https://github.com/Oscaretz/Scraper_and_mapping/blob/main/ss/scrapping.png?raw=true)
 
 2. **Visualize the heat map**: Visualize the heat map with the data gathered by clicking the botom 'Visualize'.
+![alt text](https://github.com/Oscaretz/Scraper_and_mapping/blob/main/ss/mapping.png?raw=true)
 
-3. **Downloa results**:
+4. **Downloa results**:
    Click the bottom 'Download' to download a JSON file with the news collected within the given information (Title, source, date, link and State)
 
 ```json
