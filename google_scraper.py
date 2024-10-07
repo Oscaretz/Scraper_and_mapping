@@ -53,11 +53,11 @@ class GoogleSearchNews:
     #Running the scraper asynchronous
     async def get_all_news(self):
         tasks = []
-        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(limit=2)) as session:
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(limit=10)) as session:
             for page_num in range(1, int(self.nqueries) + 1):
                 url = f"https://www.google.com/search?q={self.query.replace(',','%20')}+{self.qoption.replace(',','+OR')}+-{self.qexception.replace(',','+-')}+site%3A{self.qsite}&lr=&sca_esv=2cdbf9d7674441ef&sxsrf=ACQVn09LTw8Oz-QMTiJFOR7cBmlbGmXFjw%3A1711408457466&source=lnt&tbs=cdr%3A1%2Ccd_min%3A{self.qrangedate.replace('-','%2F').replace('/','%2Ccd_max%3A')}%2Cctr%3AcountryMX&tbm=nws&sxsrf=ACQVn08n6MZ5dLUWMKiVtyFXkWoTHss1PA%3A1709841442399&ei=IhzqZaz_F6arur8Pxr-4iAU&ved=0ahUKEwismK_e9-KEAxWmle4BHcYfDlEQ4dUDCA4&uact=5&oq=&gs_lp=Egxnd3Mtd2l6LW5ld3MiC2ludW5kYWNpw7NuMggQABiABBixAzIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABEjKJFC8A1ioE3AAeACQAQCYAcUBoAGTEKoBBDEuMTa4AQPIAQD4AQGYAgagArIFwgIFECEYoAHCAgYQABgWGB6YAwCIBgGSBwMwLjagB7Mt&sclient=gws-wiz-news&start={page_num -10}"
                 tasks.append(self.get_info_new(session, url))
-                await asyncio.sleep(5)
+                await asyncio.sleep(1)
 
             await asyncio.gather(*tasks)
 
